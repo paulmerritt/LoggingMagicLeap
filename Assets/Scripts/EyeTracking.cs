@@ -25,7 +25,7 @@ public class EyeTracking : MonoBehaviour {
         _meshRenderer = gameObject.GetComponent<MeshRenderer>();
         eyePos = new Vector3[1];
         LogToFileHelper logger = new LogToFileHelper();
-        StartCoroutine(logger.LogToFileVector3Array("log_eyes.txt", eyePos));
+        StartCoroutine(logger.LogToFileVector3Array("log_eye.json", eyePos));
     }    
     private void OnDisable() {
         MLEyes.Stop();

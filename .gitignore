@@ -62,5 +62,5 @@ crashlytics-build.properties
 
 # Unity Artifacts
 *.package
-*.mpk
+#*.mpk
 .out/

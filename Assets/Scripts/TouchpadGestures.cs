@@ -24,7 +24,7 @@ public class TouchpadGestures : MonoBehaviour {
         text[1] = "default"; 
         text[2] = "default";
         LogToFileHelper logger = new LogToFileHelper();
-        StartCoroutine(logger.LogToFileStringArray("log_touchpad.txt", text));
+        StartCoroutine(logger.LogToFileStringArray("log_touchpad.json", text));
     }
 
     void OnDestroy() {

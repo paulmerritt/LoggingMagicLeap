@@ -40,7 +40,7 @@ using TMPro;
             #endif
             cur_pose = new string[1];
             LogToFileHelper logger = new LogToFileHelper();
-            StartCoroutine(logger.LogToFileStringArray("log_poses.txt", cur_pose));
+            StartCoroutine(logger.LogToFileStringArray("log_poses.json", cur_pose));
         }
 
         /// <summary>

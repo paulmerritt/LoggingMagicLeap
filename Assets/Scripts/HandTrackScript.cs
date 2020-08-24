@@ -26,7 +26,7 @@ public class HandTrackScript : MonoBehaviour
         MLHandTracking.KeyPoseManager.EnableKeyPoses(_gestures, true, false);
         pos = new Vector3[3];
         LogToFileHelper logger = new LogToFileHelper();
-        StartCoroutine(logger.LogToFileVector3Array("log_hands.txt", pos));
+        StartCoroutine(logger.LogToFileVector3Array("log_hands.json", pos));
     }
     private void OnDestroy()
     {

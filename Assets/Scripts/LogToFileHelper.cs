@@ -12,12 +12,26 @@ public class LogToFileHelper : MonoBehaviour
         {
             Debug.Log(destination+" already exists.");
             var sr = File.AppendText(destination);
-            sr.WriteLine(data + " --- " +  System.DateTime.Now);
+            var s = "";
+            if (fileName.Contains(".json")){
+                s = "{\"data\": " + data + ", \"timestamp\": {\"" + System.DateTime.Now + "\"}}";
+            }
+            else {
+                s = data + " --- " + System.DateTime.Now;
+            }
+            sr.WriteLine(s);
             sr.Close();
         }
         else {
             var sr = File.CreateText(destination);
-            sr.WriteLine(data + " --- " +  System.DateTime.Now);
+            var s = "";
+            if (fileName.Contains(".json")){
+                s = "{\"data\": " + data + ", \"timestamp\": {\"" + System.DateTime.Now + "\"}}";
+            }
+            else {
+                s = data + " --- " + System.DateTime.Now;
+            }
+            sr.WriteLine(s);
             sr.Close();
         }
         
@@ -31,6 +45,9 @@ public class LogToFileHelper : MonoBehaviour
             foreach (Vector3 v in arr){
                 s+= v + ", ";
             }
+            if (file_name.Contains(".json")){
+                s = "{\"" + s + "\"}";
+            }
              yield return new WaitForSeconds(.1f);
              SaveFile(file_name, s);
          }
@@ -43,10 +60,14 @@ public class LogToFileHelper : MonoBehaviour
             foreach (string v in arr){
                 s+= v + ", ";
             }
+            if (file_name.Contains(".json")){
+                s = "{\"" + s + "\"}";
+            }
              yield return new WaitForSeconds(.1f);
              SaveFile(file_name, s);
          }
     }
+    
 
     public IEnumerator LogToFile(string file_name, string _data)
     {
