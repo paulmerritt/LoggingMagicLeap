@@ -42,8 +42,9 @@ public class LogToFileHelper : MonoBehaviour
     {
         while (true) {
             string s = "";
+            Vector3 last = arr[arr.Length - 1];
             foreach (Vector3 v in arr){
-                s+= v + ", ";
+                if (v != last){s+= v + ", ";}
             }
             if (file_name.Contains(".json")){
                 s = "{\"" + s + "\"}";
@@ -57,8 +58,9 @@ public class LogToFileHelper : MonoBehaviour
     {
         while (true) {
             string s = "";
+            string last = arr[arr.Length - 1];
             foreach (string v in arr){
-                s+= v + ", ";
+                if (v != last){s+= v + ", ";}
             }
             if (file_name.Contains(".json")){
                 s = "{\"" + s + "\"}";
