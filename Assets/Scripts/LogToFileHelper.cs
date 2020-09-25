@@ -10,7 +10,7 @@ public class LogToFileHelper : MonoBehaviour
         string destination = Application.persistentDataPath + fileName;
         if (File.Exists(destination))
         {
-            Debug.Log(destination+" already exists.");
+            //Debug.Log(destination+" already exists.");
             var sr = File.AppendText(destination);
             var s = "";
             if (fileName.Contains(".json")){

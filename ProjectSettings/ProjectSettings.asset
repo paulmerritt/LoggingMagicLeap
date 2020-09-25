@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: LoggingMagicLeap
+  companyName: NISTPSCR
+  productName: LoggerProgram
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -120,7 +120,8 @@ PlayerSettings:
     16:9: 1
     Others: 1
   bundleVersion: v0.24.0.1
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: -6602195166426926598, guid: 2ba4dbd235ed941bb8fdb5a40ab00f22, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -163,7 +164,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Lumin: com.test.test
+    Lumin: com.loggerprogram.nistpscr
   buildNumber: {}
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 19
@@ -690,8 +691,8 @@ PlayerSettings:
     UNet: 1
   luminIcon:
     m_Name: 
-    m_ModelFolderPath: 
-    m_PortalFolderPath: 
+    m_ModelFolderPath: Assets/Icon/Model
+    m_PortalFolderPath: Assets/Icon/Portal
   luminCert:
     m_CertPath: C:/Users/pmerritt/Documents/LoggingMagicLeap/Assets/pscr_uiux.cert
     m_SignPackage: 1

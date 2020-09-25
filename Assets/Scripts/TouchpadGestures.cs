@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.MagicLeap;
+using System;
 
 public class TouchpadGestures : MonoBehaviour {
 
@@ -15,16 +16,26 @@ public class TouchpadGestures : MonoBehaviour {
     private MLInput.Controller _controller;
     #endregion
 
+    private LogToConsoleHelper consoler = new LogToConsoleHelper();
+    public string api_key = "pmerritt160fd12639ea467f88d9d4dfeee7b321";
+
+    public string ip_address = "192.168.7.163";
+
+	public int session_id = 0;
+
     #region Unity Methods
     void Start() {
         MLInput.Start();
         _controller = MLInput.GetController(MLInput.Hand.Left);
-        text = new string[3];
+        text = new string[4];
         text[0] = "default"; 
         text[1] = "default"; 
         text[2] = "default";
+        text[3] = "default";
         LogToFileHelper logger = new LogToFileHelper();
+        
         StartCoroutine(logger.LogToFileStringArray("log_touchpad.json", text));
+        StartCoroutine(consoler.NewSession("http://"+ip_address+":57000/ext/"+ api_key + "/new_session"));
     }
 
     void OnDestroy() {
@@ -50,6 +61,22 @@ public class TouchpadGestures : MonoBehaviour {
         text[1] = stateText.text;
         directionText.text = "Direction: " + gestureDirection;
         text[2] = directionText.text;
+
+        try{
+                LogToConsoleHelper.jsn_sent j = new LogToConsoleHelper.jsn_sent();
+                j.entry_id = 1;
+			    j.message_data = text[0] + text[1] + text[2];
+			    j.time_created = ""+System.DateTime.Now;
+			    j.category = "External";
+                 
+                string s = "[" + JsonUtility.ToJson(j) + "]";
+
+                StartCoroutine(consoler.PostRequest("http://"+ip_address+":57000/ext/"+ api_key+"/"+consoler.session_id, s));
+                text[3] = consoler.receivedTextPost;
+            }
+            catch (Exception e){
+                text[3] = e.ToString();
+            }
     }
     
     void updateTransform() {

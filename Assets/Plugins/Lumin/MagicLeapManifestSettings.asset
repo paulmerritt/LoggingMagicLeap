@@ -77,11 +77,11 @@ MonoBehaviour:
   - name: CoarseLocation
     enabled: 1
   - name: Expressions
-    enabled: 1
+    enabled: 0
   - name: LocalAreaNetwork
     enabled: 1
   - name: ObjectData
-    enabled: 1
+    enabled: 0
   - name: AudioCaptureMic
     enabled: 1
   - name: AudioRecognizer

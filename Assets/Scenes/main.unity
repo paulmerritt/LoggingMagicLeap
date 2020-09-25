@@ -264,6 +264,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fb06dcd280c6464695ac1f32cf6f84e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  api_key: pmerritt160fd12639ea467f88d9d4dfeee7b321
+  ip_address: 192.168.7.163
+  session_id: 0
   _triggerPressed: 0
   _bumperPressed: 0
   _homePressed: 0

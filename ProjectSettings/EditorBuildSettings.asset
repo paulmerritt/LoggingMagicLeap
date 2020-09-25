@@ -14,6 +14,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/MagicLeap/Examples/Intermediate/Scenes/HandTracking.unity
     guid: c027f118f9ccd4979b8795eb3900db70
+  - enabled: 0
+    path: Assets/Scenes/test.unity
+    guid: a2f6d89b4c525be4bbd5aa4c00fce26f
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 2ba4dbd235ed941bb8fdb5a40ab00f22,
       type: 2}
