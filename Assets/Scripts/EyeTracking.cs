@@ -8,6 +8,8 @@ public class EyeTracking : MonoBehaviour {
     #region Public Variables
     public GameObject Camera;
     public Material FocusedMaterial, NonFocusedMaterial;
+    public string ip_address = "192.168.7.163";
+    public string api_key = "pmerritt160fd12639ea467f88d9d4dfeee7b321";
     #endregion
 
     #region Private Variables
@@ -16,7 +18,7 @@ public class EyeTracking : MonoBehaviour {
     #endregion
 
     private Vector3[] eyePos;
-
+    private LogToConsoleHelper consoler = new LogToConsoleHelper();
     #region Unity Methods
     void Start() {
         MLEyes.Start();
@@ -26,6 +28,7 @@ public class EyeTracking : MonoBehaviour {
         eyePos = new Vector3[1];
         LogToFileHelper logger = new LogToFileHelper();
         StartCoroutine(logger.LogToFileVector3Array("log_eye.json", eyePos));
+        StartCoroutine(consoler.NewSession("http://"+ip_address+":57000/ext/"+ api_key + "/new_session"));
     }    
     private void OnDisable() {
         MLEyes.Stop();
@@ -35,6 +38,17 @@ public class EyeTracking : MonoBehaviour {
             RaycastHit rayHit;
             eyePos[0] = MLEyes.FixationPoint;
             _heading = MLEyes.FixationPoint - Camera.transform.position;
+            LogToConsoleHelper.jsn_sent j = new LogToConsoleHelper.jsn_sent();
+            j.entry_id = 1;
+            j.message_data = "eye position: " + eyePos[0];
+            j.time_created = ""+System.DateTime.Now;
+            j.category = "External";
+            
+
+            string s = "[" + JsonUtility.ToJson(j) + "]";
+            if (consoler.session_id != 0){
+                StartCoroutine(consoler.PostRequest("http://"+ip_address+":57000/ext/"+ api_key+"/"+consoler.session_id, s));
+            }
             GameObject.Find("DebugLogEyes").GetComponent<TextMeshProUGUI>().text = "Eyes are looking at: " + eyePos[0];
             
             // Use the proper material

@@ -23,9 +23,6 @@ public class Control6DOF : MonoBehaviour {
     #endregion
 
     public string api_key = "pmerritt160fd12639ea467f88d9d4dfeee7b321";
-	
-	bool done = false;
-
 	public string ip_address = "192.168.7.163";
 
     
@@ -103,6 +100,7 @@ public class Control6DOF : MonoBehaviour {
                 
             }catch(Exception e){
                 Debug.Log("ohp something went wrong");
+                Debug.Log(e.ToString());
                 //text[5] = "error: " + e.ToString();
             }
             _triggerPressed = true;

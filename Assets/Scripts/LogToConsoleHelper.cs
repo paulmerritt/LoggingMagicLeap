@@ -13,22 +13,16 @@ using System;
 public class LogToConsoleHelper : MonoBehaviour
 {
 
-public string api_key = "pmerritt160fd12639ea467f88d9d4dfeee7b321";
-	
-	bool done = false;
+	public string api_key = "pmerritt160fd12639ea467f88d9d4dfeee7b321";
 
 	public string ip_address = "192.168.7.163";
 
 	public int session_id = 0;
 
-    private bool tested_new_session = false;
-	private bool post_request_finished_flag = false;
-	private bool get_request_finished_flag = false;
-
 	public string receivedTextPost = "";
 	public string receivedTextGet = "";
 	public string receivedTextSession = "";
-	//private IEnumerator i = null;
+	
 
     IEnumerator GetRequest(string url)
     {
@@ -39,7 +33,6 @@ public string api_key = "pmerritt160fd12639ea467f88d9d4dfeee7b321";
 
 	     //Send the request then wait here until it returns
 	     yield return uwr.SendWebRequest();
-
 	     if (uwr.isNetworkError)
 	     {
 	         Debug.Log("Error While Sending: " + uwr.error);
@@ -54,6 +47,7 @@ public string api_key = "pmerritt160fd12639ea467f88d9d4dfeee7b321";
 			 }
 			 catch(NullReferenceException e){
 				 Debug.Log("No new alerts to obtain");
+				 Debug.Log(e.ToString());
 				 receivedTextGet = "";
 			 }
 			
@@ -64,7 +58,7 @@ public string api_key = "pmerritt160fd12639ea467f88d9d4dfeee7b321";
     }
 	
 	public IEnumerator NewSession(string url){
-		//post_request_finished_flag = false;
+
 		yield return new WaitForSeconds(0f);
 		var uwr = new UnityWebRequest(url, "POST");
 		uwr.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
@@ -96,7 +90,7 @@ public string api_key = "pmerritt160fd12639ea467f88d9d4dfeee7b321";
 
 	public IEnumerator PostRequest(string url, string json)
 	 {
-		 //post_request_finished_flag = false;
+
 	     var uwr = new UnityWebRequest(url, "POST");
 	     byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(json);
 	     uwr.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
@@ -130,12 +124,12 @@ public string api_key = "pmerritt160fd12639ea467f88d9d4dfeee7b321";
 
 	 void TestIfReceived(){
 		 Debug.Log("Testing if able to receive alerts from session (restart office fire)");
-			if (receivedTextGet != "" && get_request_finished_flag){
+			if (receivedTextGet != ""){
 				Debug.Log("Test passed, received alerts: " + receivedTextGet);
 			}
 			else {
 				Debug.Log("Test failed, unable receive new alerts");
-				Debug.Log(get_request_finished_flag);
+				
 			}
 	 }
 	 void TestIfNewSession(){
@@ -151,12 +145,12 @@ public string api_key = "pmerritt160fd12639ea467f88d9d4dfeee7b321";
 
 	 void TestIfPosted(){
 		Debug.Log("Testing if posted to session");
-		if (receivedTextPost != "" && post_request_finished_flag){
+		if (receivedTextPost != ""){
 			Debug.Log("Test passed, posted to session and received: " + receivedTextPost);
 		}
 		else {
 			Debug.Log("Test failed, unable to post to session");
-			Debug.Log(post_request_finished_flag);
+			
 		}
 	 }
 

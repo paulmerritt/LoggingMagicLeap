@@ -14,6 +14,7 @@ public class LogCameraPosition : MonoBehaviour
 	public string ip_address = "192.168.7.163";
 
 	public int session_id = 0;
+    
     void Start()
     {
         text = new string[3];
